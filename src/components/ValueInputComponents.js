@@ -9,15 +9,22 @@ const ValueInputComponents = () => {
             <Text style={styles.title}>Radius of geolocation</Text>
             <AppContext.Consumer>
                 {context => (
-                        <TextInput
-                            style={styles.input}
-                            onChangeText={(value) => context.setValue(value)}
-                            value={context.value}
-                        />
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={(value) => {
+                            if (value >= 10000) {
+                                context.setValue('10000');
+                            } else {
+                                context.setValue(value);
+                            }
+                        }
+                        }
+                        value={context.value}
+                    />
                 )}
             </AppContext.Consumer>
             <Text style={styles.textAdditional}>
-                Radius should be in meter and lower 20000m !
+                Radius should be in meter and lower 10000m !
             </Text>
         </View>
     )
