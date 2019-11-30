@@ -39,17 +39,36 @@ const VelibStationsComponents = ({navigation}) => {
                                                   Id: item.recordid,
                                                   Station: item.fields.station_name,
                                                   State: item.fields.station_state,
-                                                  Dock: item.fields.nbedock,
+                                                  Dock: item.fields.nbedock + item.fields.nbdock,
                                                   FreeDock: item.fields.nbfreeedock,
                                                   Payment: item.fields.creditcard,
-                                                  VelibAvailable: item.fields.nbbike,
+                                                  VelibAvailableMechanicals: item.fields.nbbike,
+                                                  VelibAvailableElectricals: item.fields.nbebike,
+                                                  TotalVelib: item.fields.nbbike+item.fields.nbebike,
                                                   Latitude: item.fields.geo[0],
                                                   Longitude: item.fields.geo[1],
                                               });
                                           }}>
                                               <Text style={styles.itemTitle}>{item.fields.station_name}</Text>
-                                              <Text style={styles.item}><Ionicons name="ios-checkmark-circle" size={20}
-                                                                                  color={'green'}/> {item.fields.station_state}
+                                              <Text style={styles.item}>
+                                                  {item.fields.station_state === 'Operative' &&
+                                                  <>
+                                                      <Ionicons name="ios-checkmark-circle" size={20}
+                                                                 color={'green'}/> {item.fields.station_state}
+                                                  </>
+                                                  }
+                                                  {item.fields.station_state === 'Work in progress' &&
+                                                  <>
+                                                      <Ionicons name="ios-alert" size={20}
+                                                                 color={'#FFD700'}/> {item.fields.station_state}
+                                                  </>
+                                                  }
+                                                  {item.fields.station_state === 'Close' &&
+                                                  <>
+                                                      <Ionicons name="ios-close-circle" size={20}
+                                                                color={'red'}/> {item.fields.station_state}
+                                                  </>
+                                                  }
                                               </Text>
                                           </TouchableOpacity>
                                       </>

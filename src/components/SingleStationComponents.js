@@ -44,13 +44,13 @@ const SingleStationComponents = ({navigation}) => {
                         {
                             navigation.getParam('VelibAvailable') !== 0 && (
                                 <Text
-                                    style={[styles.text, styles.textAvailable]}>{navigation.getParam('VelibAvailable')}/{navigation.getParam('Dock')}</Text>
+                                    style={styles.textAvailable}>{navigation.getParam('TotalVelib')}/{navigation.getParam('Dock')}</Text>
                             )
                         }
                         {
                             navigation.getParam('VelibAvailable') === 0 && (
                                 <Text
-                                    style={[styles.text, styles.textNotAvailable]}>{navigation.getParam('VelibAvailable')}/{navigation.getParam('Dock')}</Text>
+                                    style={styles.textNotAvailable}>{navigation.getParam('TotalVelib')}/{navigation.getParam('Dock')}</Text>
                             )
                         }
                     </View>
@@ -58,13 +58,29 @@ const SingleStationComponents = ({navigation}) => {
             </MapView>
             <View style={styles.containerDescription}>
                 <Text style={styles.title}>{navigation.getParam('Station')}</Text>
-                <Text style={styles.text}>
-                    <Ionicons name="ios-checkmark-circle" size={20} color={'green'}/> {navigation.getParam('State')}
+                <Text style={styles.item}>
+                    {navigation.getParam('State') === 'Operative' &&
+                    <>
+                        <Ionicons name="ios-checkmark-circle" size={20}
+                                  color={'green'}/> {navigation.getParam('State')}
+                    </>
+                    }
+                    {navigation.getParam('State') === 'Work in progress' &&
+                    <>
+                        <Ionicons name="ios-alert" size={20}
+                                  color={'#FFD700'}/> {navigation.getParam('State')}
+                    </>
+                    }
+                    {navigation.getParam('State') === 'Close' &&
+                    <>
+                        <Ionicons name="ios-close-circle" size={20}
+                                  color={'red'}/> {navigation.getParam('State')}
+                    </>
+                    }
                 </Text>
-                <Text style={styles.text}>Dock : {navigation.getParam('Dock')}</Text>
-                <Text style={styles.text}>Free dock : {navigation.getParam('FreeDock')}</Text>
-                <Text style={styles.text}>Payment : {navigation.getParam('Payment')}</Text>
-                <Text style={styles.text}>Velib Available : {navigation.getParam('VelibAvailable')}</Text>
+                <Text style={[styles.text, styles.textVelib]}>{navigation.getParam('VelibAvailableMechanicals')} Velib' Mechanicals</Text>
+                <Text style={[styles.text, styles.textVelibElectricals]}>{navigation.getParam('VelibAvailableElectricals')} Velib' Electricals</Text>
+                <Text style={[styles.text, styles.textPlaces]}>{navigation.getParam('FreeDock')} Free Place(s)</Text>
                 <AppContext.Consumer>
                     {context => (
                         <TouchableOpacity onPress={() => {
@@ -137,6 +153,24 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
+        paddingTop: 5,
+        paddingBottom: 5,
+        margin: 10,
+        width: 200,
+        borderRadius: 10,
+        textAlign: 'center',
+    },
+    textPlaces: {
+        backgroundColor: '#df2f8a',
+        color: '#fff',
+    },
+    textVelib: {
+        backgroundColor: 'green',
+        color: '#fff',
+    },
+    textVelibElectricals: {
+        backgroundColor: '#15aac3',
+        color: '#fff',
     },
     textAvailable: {
         color: 'green',
@@ -146,5 +180,9 @@ const styles = StyleSheet.create({
     },
     textAdditional: {
         fontStyle: 'italic',
+    },
+    item: {
+        fontSize: 16,
+        textAlign: 'center',
     },
 });

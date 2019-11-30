@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet,TextInput} from 'react-native';
 import VelibStationsComponents from "../components/VelibStationsComponents";
+import ValueInputComponents from "../components/ValueInputComponents";
 
 
 const VelibStationsScreen = (props) => {
     return (
         <View style={styles.container}>
+            <ValueInputComponents/>
             <VelibStationsComponents navigation={props.navigation}/>
         </View>
     )

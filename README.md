@@ -10,7 +10,11 @@
 
 Exercice 1 : Flex et animation
 ------------------------------
+src/services/cycleAnimationServices.js
 
+src/context/AppContext.js
+
+src/navigations/HomeScreen.js
 
 Exercice 2 : Navigation
 ------------------------------
@@ -46,3 +50,4 @@ src/components/VelibStationsComponents.js
 
 Exercice 7 : Test unitaire
 --------------------------
+src/navigations/__test__/HomeScreen.test.js

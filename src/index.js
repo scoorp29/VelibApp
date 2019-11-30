@@ -59,7 +59,7 @@ const AppNavigator = createBottomTabNavigator({
             }
         },
     }, {
-        initialRouteName: "Stations",
+        initialRouteName: "Home",
         tabBarOptions: {
             activeTintColor: '#ac599e'
         },
